@@ -7,7 +7,7 @@ public class Logger {
     private FileLogger fileLogger;
 
     public Logger() {
-        fileLogger = new FileLogger("logs.txt");
+        fileLogger = new FileLogger(System.getProperty("user.home") + "/.stream/logs.txt");
     }
 
     public void error(String message) {

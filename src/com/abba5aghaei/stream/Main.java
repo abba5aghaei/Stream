@@ -155,7 +155,7 @@ public class Main extends Application {
 
     private static void loadSetting() {
         try {
-            File setting = new File("setting.abs");
+            File setting = new File(System.getProperty("user.home") + "/.stream/setting.abs");
             if (setting.exists()) {
                 Scanner scanner = new Scanner(new FileInputStream(setting));
                 scanner.useDelimiter("%");
@@ -189,7 +189,7 @@ public class Main extends Application {
 
     public static void saveSetting() {
         try {
-            File setting = new File("setting.abs");
+            File setting = new File(System.getProperty("user.home") + "/.stream/setting.abs");
             PrintWriter writer = new PrintWriter(setting);
             writer.write(encode(String.valueOf(manual)));
             writer.write("%");
