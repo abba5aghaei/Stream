@@ -197,7 +197,6 @@ public class Controller implements Initializable {
         } else {
             titleLabel.setText("Starting hotspot...");
             serverWaiter.setVisible(true);
-            new Thread(() -> {
                 if (Main.manual) {
                     Main.currentConnection = true;
                     forceCreateServer();
@@ -209,15 +208,13 @@ public class Controller implements Initializable {
                                 forceCreateServer();
                             } else {
                                 AtomicInteger r = new AtomicInteger();
-                                try {
-                                    new Thread(()-> Platform.runLater(() -> r.set(question("Failed to create hotspot", "Do you want to start server and make connection manually?")))).join();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-
+                                r.set(question("Failed to create hotspot", "Do you want to start server and make connection manually?"));
                                 if (r.get() == 1) {
                                     Main.currentConnection = true;
                                     forceCreateServer();
+                                }
+                                else {
+                                    Main.setDisconnected();
                                 }
                             }
                         } else {
@@ -225,19 +222,16 @@ public class Controller implements Initializable {
                         }
                     } else {
                         AtomicInteger r = new AtomicInteger();
-                        try {
-                            new Thread(()-> Platform.runLater(() -> r.set(question("Wi-Fi device does't support hosted network", "Do you want to start server and make connection manually?")))).join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+                        r.set(question("Wi-Fi device does't support hosted network", "Do you want to start server and make connection manually?"));
                         if (r.get() == 1) {
                             Main.currentConnection = true;
                             forceCreateServer();
                         }
+                        else {
+                            Main.setDisconnected();
+                        }
                     }
                 }
-            }).start();
         }
     }
 
@@ -267,7 +261,6 @@ public class Controller implements Initializable {
         } else {
             titleLabel.setText("Connecting...");
             clientWaiter.setVisible(true);
-            new Thread(() -> {
                 if (Main.manual) {
                     Main.currentConnection = true;
                     forceJoin();
@@ -282,50 +275,45 @@ public class Controller implements Initializable {
                                 auth = 0;
                             Platform.runLater(() -> wifiStatusLabel.setText("Connecting..."));
                             if (Main.wifiManager.connect(name, name, auth)) {
+                                Main.logger.info("Connect result is true");
                                 Main.currentConnection = false;
                                 forceJoin();
                             } else {
+                                Main.logger.info("Connect result is false");
                                 AtomicInteger r = new AtomicInteger();
-                                try {
-                                    new Thread(()-> Platform.runLater(() -> r.set(question("Connection failed!", "Do you want to join manually?")))).join();
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-
+                                r.set(question("Connection failed!", "Do you want to join manually?"));
                                 if (r.get() == 1) {
                                     Main.currentConnection = true;
                                     forceJoin();
+                                }
+                                else {
+                                    Main.setDisconnected();
                                 }
                                 Platform.runLater(() -> wifiStatusLabel.setText("Available Networks"));
                             }
                         } else {
                             AtomicInteger r = new AtomicInteger();
-                            try {
-                                new Thread(()-> Platform.runLater(() -> r.set(question("Connection failed!", "Do you want to join manually?")))).join();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-
+                            r.set(question("Connection failed!", "Do you want to join manually?"));
                             if (r.get() == 1) {
                                 Main.currentConnection = true;
                                 forceJoin();
                             }
+                            else {
+                                Main.setDisconnected();
+                            }
                         }
                     } else {
                         AtomicInteger r = new AtomicInteger();
-                        try {
-                            new Thread(()-> Platform.runLater(() -> r.set(question("Connection failed!", "Do you want to join manually?")))).join();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
+                        r.set(question("Connection failed!", "Do you want to join manually?"));
                         if (r.get() == 1) {
                             Main.currentConnection = true;
                             forceJoin();
                         }
+                        else {
+                            Main.setDisconnected();
+                        }
                     }
                 }
-            }).start();
         }
     }
 
@@ -844,17 +832,21 @@ public class Controller implements Initializable {
             connectItem.setOnAction(event -> {
                 int index = wifiList.getSelectionModel().getSelectedIndex();
                 if (index > -1) {
-                    String name = pairList.get(index).get(0);
-                    String authString = pairList.get(index).get(2);
-                    int auth = 1;
-                    if (authString.equals("Open") || authString.equals("--"))
-                        auth = 0;
-                    Platform.runLater(() -> wifiStatusLabel.setText("Connecting..."));
-                    if (Main.wifiManager.connect(name, name, auth)) {
-                        Toast.make("Connected");
-                    } else {
-                        Toast.make("Failed to connect wifi");
-                    }
+                    new Thread(()->{
+                        String name = pairList.get(index).get(0);
+                        String authString = pairList.get(index).get(2);
+                        int auth = 1;
+                        if (authString.equals("Open") || authString.equals("--"))
+                            auth = 0;
+                        Platform.runLater(() -> wifiStatusLabel.setText("Connecting..."));
+                        if (Main.wifiManager.connect(name, name, auth)) {
+                            Main.logger.info("Connect result is true");
+                            Toast.make("Connected");
+                        } else {
+                            Main.logger.info("Connect result is false");
+                            Toast.make("Failed to connect wifi");
+                        }
+                    }).start();
                     Platform.runLater(() -> wifiStatusLabel.setText("Available Networks"));
                 }
             });

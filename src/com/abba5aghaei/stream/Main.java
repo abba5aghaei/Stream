@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Scanner;
 import com.abba5aghaei.wifi.InOut;
 import com.abba5aghaei.wifi.WifiManager;
@@ -89,12 +90,15 @@ public class Main extends Application {
                 @Override
                 public String getPassword() {
                     String password;
-                    TextInputDialog dialog = new TextInputDialog();
-                    dialog.setTitle("Authentication");
-                    dialog.setHeaderText("Enter the password:");
-                    dialog.initOwner(Main.stage);
                     try {
-                        password = dialog.showAndWait().get();
+                        TextInputDialog dialog = new TextInputDialog();
+                        dialog.setTitle("Authentication");
+                        dialog.setHeaderText("Enter the password:");
+                        dialog.initOwner(Main.stage);
+                        Optional<String> res = dialog.showAndWait();
+                        if (res.isPresent())
+                            password = res.get();
+                        else return null;
                     }
                     catch (Exception e) {
                         return null;
