@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="pane" prefHeight="70.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ProgressBar fx:id="progress" layoutX="26.0" layoutY="38.0" progress="0.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
+      <Label fx:id="size" layoutX="113.0" layoutY="13.0" text="Label" textFill="#a4a4a4" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="50.0">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label fx:id="name" layoutX="14.0" layoutY="27.0" text="Label" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="40.0">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Label fx:id="status" layoutX="10.0" layoutY="6.0" text="in Queue..." AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="6.0">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <ProgressIndicator fx:id="indicator" layoutX="251.0" layoutY="27.0" progress="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="20.0" />
+   </children>
+</AnchorPane>

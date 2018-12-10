@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane onSwipeLeft="#closeDrawer" onSwipeRight="#openDrawer" prefHeight="690.0" prefWidth="560.0" stylesheets="@resources/styles/style-light.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.abba5aghaei.stream.view.Controller">
+    <children>
+    	<Button layoutX="0.0" layoutY="-30.0" />
+      <AnchorPane onMouseClicked="#closeDrawer" onSwipeLeft="#closeDrawer" onSwipeRight="#openDrawer" prefHeight="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+                  <MenuButton layoutX="407.0" layoutY="15.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="30.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#fileReceived" text="Inbox" />
+                          <MenuItem mnemonicParsing="false" onAction="#setting" text="Setting" />
+                          <MenuItem mnemonicParsing="false" onAction="#exit" text="Exit" />
+                      </items>
+                  </MenuButton>
+            <Label layoutX="424.0" layoutY="15.0" text="Top Most" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="13.0">
+               <font>
+                  <Font size="14.0" />
+               </font></Label>
+            <ImageView fx:id="toggleImage" fitHeight="30.0" fitWidth="90.0" onMouseClicked="#alwaysOnTop" pickOnBounds="true" preserveRatio="true" styleClass="image-toggle" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="10.0" />
+                  <Label fx:id="titleLabel" layoutX="167.0" layoutY="4.0" styleClass="label-title" text="Stream" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="10.0" />
+                  <HBox focusTraversable="true" layoutX="5.0" layoutY="5.0" onMouseClicked="#doDraw" prefHeight="40.0" prefWidth="40.0" styleClass="button-toggle" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="7.0" />
+         </children>
+      </AnchorPane>
+        <Separator AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0" />
+        <TabPane focusTraversable="false" layoutX="35.0" layoutY="135.0" onMouseClicked="#closeDrawer" onSwipeLeft="#closeDrawer" onSwipeRight="#openDrawer" side="BOTTOM" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="51.0">
+            <tabs>
+                <Tab closable="false" text="Send">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Button layoutX="9.0" layoutY="31.0" onAction="#createServer" prefHeight="45.0" prefWidth="200.0" styleClass="button-white" text="Create Server" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="30.0" />
+                                <Button layoutX="9.0" layoutY="82.0" onAction="#disconnect" prefHeight="45.0" prefWidth="200.0" styleClass="button-white" text="Shutdown" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="82.0" />
+                                <Button id="button-browse" fx:id="browseButton" layoutX="346.0" layoutY="11.0" onAction="#browse" prefHeight="90.0" prefWidth="90.0" styleClass="button-white" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0" />
+                                <ListView fx:id="infoList" focusTraversable="false" layoutX="12.0" layoutY="84.0" prefHeight="330.0" prefWidth="207.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+                                    <padding>
+                                        <Insets left="2.0" right="1.0" top="15.0" />
+                                    </padding></ListView>
+                                <ListView fx:id="sentList" focusTraversable="false" layoutX="228.0" layoutY="85.0" onDragDropped="#handleDraggedFiles" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
+                                    <padding>
+                                        <Insets left="2.0" top="15.0" />
+                                    </padding></ListView>
+                                <Label layoutX="231.0" layoutY="59.0" styleClass="label-subtitle" text="Sent" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="148.0">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect></Label>
+                                <Label layoutX="14.0" layoutY="72.0" styleClass="label-subtitle" text="Host Information" AnchorPane.leftAnchor="65.0" AnchorPane.topAnchor="148.0">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect></Label>
+                                <Label fx:id="dragLabel" layoutX="263.0" layoutY="302.0" styleClass="label-title" text="Drag and drop here" textFill="#aba3a3" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="302.0" />
+                                <ProgressIndicator fx:id="serverWaiter" layoutX="234.0" layoutY="33.0" prefHeight="93.0" prefWidth="113.0" visible="false" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="33.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab closable="false" text="Receive">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Button layoutX="19.0" layoutY="23.0" onAction="#join" prefHeight="45.0" prefWidth="200.0" styleClass="button-white" text="Join" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="30.0" />
+                                <Button layoutX="19.0" layoutY="75.0" onAction="#disconnect" prefHeight="45.0" prefWidth="200.0" styleClass="button-white" text="Disconnect" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="290.0" AnchorPane.topAnchor="82.0" />
+                                <Button id="button-request" fx:id="scanButton" layoutX="232.0" layoutY="31.0" onAction="#showWifiList" prefHeight="90.0" prefWidth="90.0" styleClass="button-white" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="35.0" />
+                                <ListView fx:id="receivedList" focusTraversable="false" layoutX="244.0" layoutY="50.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="150.0">
+                                    <padding>
+                                        <Insets left="2.0" top="15.0" />
+                                    </padding></ListView>
+                                <ListView fx:id="wifiList" layoutX="65.0" layoutY="50.0" prefHeight="330.0" prefWidth="215.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="150.0">
+                                    <padding>
+                                        <Insets bottom="15.0" left="2.0" right="2.0" top="15.0" />
+                                    </padding></ListView>
+                                <Label layoutX="225.0" layoutY="63.0" styleClass="label-subtitle" text="Received" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="148.0">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect></Label>
+                                <Label fx:id="wifiStatusLabel" layoutX="10.0" layoutY="62.0" styleClass="label-subtitle" text="Available Networks" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="148.0">
+                                    <effect>
+                                        <DropShadow />
+                                    </effect></Label>
+                                <Label fx:id="emptyLabel" layoutX="254.0" layoutY="303.0" styleClass="label-title" text="No file received yet..." textFill="#c6c2c2" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="302.0" />
+                                <ProgressIndicator fx:id="clientWaiter" layoutX="234.0" layoutY="33.0" prefHeight="93.0" prefWidth="113.0" visible="false" AnchorPane.rightAnchor="153.0" AnchorPane.topAnchor="33.0" />
+                        <ComboBox fx:id="interfacesCombo" focusTraversable="false" layoutX="322.0" layoutY="165.0" onAction="#changeInterface" prefHeight="26.0" prefWidth="213.0" promptText="There is no any interfaces" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="6.0" />
+                        <ImageView fx:id="scannerImage" fitHeight="200.0" fitWidth="200.0" layoutX="288.0" layoutY="227.0" opacity="0.0" pickOnBounds="true" preserveRatio="true" styleClass="image-scanner" visible="false" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="227.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+        <VBox fx:id="drawer" layoutX="-258.0" prefHeight="670.0" prefWidth="258.0" styleClass="v-box" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox prefHeight="50.0" prefWidth="286.0" spacing="10.0">
+                    <children>
+                        <HBox onMouseClicked="#doDraw" prefHeight="40.0" prefWidth="40.0" styleClass="button-toggle" />
+                        <Label styleClass="label-title" text="Stream">
+                            <HBox.margin>
+                                <Insets top="2.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                    </padding>
+                    <VBox.margin>
+                        <Insets />
+                    </VBox.margin>
+                </HBox>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="100.0" fitWidth="265.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-main" />
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="20.0" left="5.0" top="20.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox onMouseClicked="#setting" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-setting" />
+                        <Label styleClass="label-menu" text="Setting">
+                            <HBox.margin>
+                                <Insets top="2.0" />
+                            </HBox.margin></Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox onMouseClicked="#fileReceived" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-received" />
+                        <Label styleClass="label-menu" text="File received">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox disable="true" onMouseClicked="#share" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-share" />
+                        <Label styleClass="label-menu" text="Share App">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin></Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox onMouseClicked="#feedback" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-feedback" />
+                        <Label styleClass="label-menu" text="Feedback">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox onMouseClicked="#help" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-help" />
+                        <Label styleClass="label-menu" text="Help">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox onMouseClicked="#about" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-about" />
+                        <Label styleClass="label-menu" text="About">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin></Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+                <HBox onMouseClicked="#exit" spacing="10.0" styleClass="h-box">
+                    <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view-exit" />
+                        <Label styleClass="label-menu" text="Exit">
+                            <HBox.margin>
+                                <Insets top="5.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </padding>
+                </HBox>
+            </children></VBox>
+    </children>
+</AnchorPane>

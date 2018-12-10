@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="467.0" prefWidth="410.0" stylesheets="@resources/styles/setting-style-light.css" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <TitledPane animated="false" text="Hotspot">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <children>
+                        <TextField layoutX="110.0" layoutY="57.0" prefWidth="250.0" promptText="Stream" />
+                        <TextField layoutX="110.0" layoutY="97.0" prefWidth="250.0" promptText="Enter 8 digit" />
+                  <ImageView fx:id="manualToggle" fitHeight="30.0" fitWidth="90.0" layoutX="202.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="manualLabel" layoutX="150.0" layoutY="21.0" text="WiFi" />
+                        <Label layoutX="25.0" layoutY="60.0" text="Name:" />
+                        <Label layoutX="25.0" layoutY="100.0" text="Password:" />
+                  <Label layoutX="25.0" layoutY="20.0" text="Connection Type:" />
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Manul Connection">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <children>
+                        <TextField layoutX="110.0" layoutY="15.0" prefWidth="250.0" promptText="localhost" />
+                        <TextField layoutX="110.0" layoutY="57.0" prefWidth="250.0" promptText="Port Number" />
+                        <Label layoutX="25.0" layoutY="20.0" text="Host:" />
+                        <Label layoutX="25.0" layoutY="60.0" text="Port:" />
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+        <TitledPane animated="false" text="Inbox">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0">
+                    <children>
+                        <TextField layoutX="110.0" layoutY="17.0" prefWidth="250.0" promptText="Enter address or browse" />
+                        <Button layoutX="25.0" layoutY="50.0" text="Browse" />
+                        <Label layoutX="25.0" layoutY="20.0" text="Directory:" />
+                    </children>
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+                </AnchorPane>
+            </content>
+        </TitledPane>
+        <AnchorPane>
+            <children>
+                <Button layoutX="100.0" layoutY="62.0" prefHeight="30.0" prefWidth="140.0" text="Cancel" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="0.0" />
+                <Button layoutX="205.0" layoutY="62.0" prefHeight="30.0" prefWidth="140.0" text="Apply" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="0.0" />
+            </children>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+        </AnchorPane>
+    </children>
+</VBox>

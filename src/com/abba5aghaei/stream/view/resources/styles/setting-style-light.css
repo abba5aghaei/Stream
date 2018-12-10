@@ -1,0 +1,41 @@
+.label {
+	-fx-font-size: 14.0;
+}
+.text-field {
+    -fx-focus-color: #0091C2;
+    -fx-padding: 0.333333em 0 0.333333em 0;
+}
+
+.text-field > .input-line {
+    -fx-background-color: #4d4d4d;
+    -fx-pref-height: 1px;
+    -fx-translate-y: 1px;
+}
+
+.text-field > .input-focused-line{
+    -fx-background-color: #4059A9;
+    -fx-pref-height: 2px;
+}
+
+.text-field {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, #e7e7e7;
+    -fx-text-fill: black;
+    -fx-font-size: 14.0;
+    -fx-prompt-text-fill: #4D4D4D;
+    -fx-accent: red;
+}
+.text-field:focused {
+    -fx-background-color: TRANSPARENT, TRANSPARENT, #0091C2;
+    -fx-text-fill: white;
+}
+
+.button{
+    -fx-background-color: #ddd;
+    -fx-font-size: 14.0;
+}
+.button:hover{
+    -fx-background-color: #bbb8;
+}
+.button:pressed{
+    -fx-background-color: #bbbd;
+}
