@@ -29,6 +29,11 @@ public class FileLogger {
 
     private void write(String message, String level) {
         try {
+            if (!file.getParentFile().exists()) {
+                if (!file.getParentFile().mkdir()) {
+                    throw new Exception("Can't create log file");
+                }
+            }
             if (!file.exists() || !file.isFile()) {
                 if (!file.createNewFile()) {
                     throw new Exception("Can't create log file");
@@ -44,7 +49,6 @@ public class FileLogger {
                 writer.close();
             }
             catch (Exception e) {
-                writer = null;
                 System.out.println("Exception in closing log com.abba5aghaei.stream: " + e.getMessage());
             }
         }

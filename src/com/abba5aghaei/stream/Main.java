@@ -190,6 +190,16 @@ public class Main extends Application {
     public static void saveSetting() {
         try {
             File setting = new File(System.getProperty("user.home") + "/.stream/setting.abs");
+            if (!setting.getParentFile().exists()) {
+                if (!setting.getParentFile().mkdir()) {
+                    throw new Exception("Can't create setting file");
+                }
+            }
+            if (!setting.exists() || !setting.isFile()) {
+                if (!setting.createNewFile()) {
+                    throw new Exception("Can't create setting file");
+                }
+            }
             PrintWriter writer = new PrintWriter(setting);
             writer.write(encode(String.valueOf(manual)));
             writer.write("%");
